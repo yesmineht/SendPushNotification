@@ -1,0 +1,137 @@
+﻿@model System.Data.DataTable
+
+
+@{
+    ViewBag.Title = "Notification List";
+}
+
+@*table*@
+
+
+@*table*@
+<style>
+    .modal-body {
+        width: 110%;
+        border-bottom-width:thin;
+    }
+    #hiddenValue {
+        width: 110%;
+    }
+</style>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<h2>List of Notfication </h2>
+<a class="btn btn-success" style="margin-bottom:10px" href="@Url.Action("Create","Notification")"><i class="fa fa-plus"></i> add </a>
+
+
+<table id="notificationTable" class="table table-striped table-bordered" style="width:100%">
+
+    <tr>
+        <th> Title</th>
+        <th> Text</th>
+        <th> Icon</th>
+        <th>Image</th>
+        <th>ClickAction</th>
+        <th>options</th>
+    </tr>
+
+    @for (int i = 0; i < Model.Rows.Count; i++)
+    {
+        <tr>
+
+            <td>@Model.Rows[i][1]</td>
+            <td>@Model.Rows[i][2]</td>
+            <td> <img src="@Model.Rows[i][3]" height="80" width="80" /></td>
+            <td><img src="@Model.Rows[i][4]" height="80" width="80" /></td>
+            <td>@Model.Rows[i][5]</td>
+
+            <td>
+                <a href="@Url.Action("Edit", "Notification", new { @id = Model.Rows[i][0] })">Edit</a>
+                <a href="@Url.Action("Delete", "Notification", new { @id = Model.Rows[i][0] }) " onclick="return confirm('are you sure to delete this notification')">Delete</a>
+                @*<a data-id="@Model.Rows[i][0]" href="@Url.Action("DisplayToken", "Notification", new { @id = Model.Rows[i][0] } )">Token</a>*@
+                <a href="#" data-target="#my_modal" data-toggle="modal"
+                   class="identifyingClass" data-id="@Model.Rows[i][0]">SendToken</a>
+
+                <div class="modal fade" id="my_modal" tabindex="-1"
+                     role="dialog" aria-labelledby="my_modalLabel">
+                    <div class="modal-dialog" role="dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close"
+                                        data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <h4 class="modal-title"
+                                    id="myModalLabel">
+                                    Enter your token
+                                </h4>
+                            </div>
+                            <div class="modal-body">
+                                Token
+                                <input type="text" name="hiddenValue"
+                                       id="hiddenValue" value="" hidden />
+                                <input type="text" name="hiddenValue"
+                                       id="token" value="" />
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btnbtn-default" data-dismiss="modal">
+                                    close
+                                </button>
+                                <button class="btn btn-primary"
+                                        type="submit" value="send" onclick="send_token()">
+                                    send
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </td>
+        </tr>
+
+    }
+</table>
+
+
+
+
+
+
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+<script type="text/javascript">
+
+    $(function () {
+        $(".identifyingClass").click(function () {
+            var my_id_value = $(this).data('id');
+            $(".modal-body #hiddenValue").val(my_id_value);
+        })
+    });
+    function send_token() {
+
+        var token = document.getElementById("token").value;
+        var ID = document.getElementById("hiddenValue").value;
+        $.ajax({
+
+
+            url: "/Notification/SendPush",
+            type: "POST",
+            data: { 'id': ID, 'token': token }
+        });
+    }
+
+   
+    
+
+</script>
+
+
+
+
+
+

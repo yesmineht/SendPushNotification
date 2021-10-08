@@ -1,0 +1,130 @@
+﻿
+
+
+
+<!DOCTYPE html>
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head runat="server">
+
+    <title></title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-app.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-messaging.js"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+          rel="stylesheet">
+
+    <style>
+
+        .box-token {
+            width: 80%;
+            margin: auto;
+            background: #ececec;
+            box-shadow: 2px 0 2px 2px #dddddd;
+            padding: 30px;
+            margin-top: 30px;
+            text-align: center;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .box-token1 {
+            width: 80%;
+            margin: auto;
+            background: #a2efdc;
+            box-shadow: 2px 0 2px 2px #dddddd;
+            padding: 30px;
+            margin-top: 30px;
+            text-align: center;
+            font-family: 'Roboto', sans-serif;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!--<form id="form1" runat="server">
+
+       <div>TEST</div>
+
+    </form>-->
+
+
+
+    <div class="box-token1">
+
+        Please click allow to receive notifications.
+
+    </div>
+
+    <br />
+
+    <div class="box-token">
+
+        Your access token is:<br /><br />
+
+        <div class="token_value"></div>
+
+    </div>
+
+
+
+
+
+    <script>
+
+
+        const firebaseConfig = {
+        apiKey: "AIzaSyBzC_H9hf7RfVMT2R9_cc4n8yjnoddeWYI",
+            authDomain: "notification-fde93.firebaseapp.com",
+                databaseURL: "https://notification-fde93.firebaseio.com",
+                    projectId: "notification-fde93",
+                        storageBucket: "notification-fde93.appspot.com",
+                            messagingSenderId: "283261082288",
+                                appId: "1:283261082288:web:698ca74936cc5bb20df975",
+                                    measurementId: "G-K1KN6RRCZK"
+};
+
+
+        // Initialize Firebase
+
+        firebase.initializeApp(firebaseConfig);
+
+        const messaging = firebase.messaging();
+
+        messaging.requestPermission()
+
+            .then(function () {
+
+                console.log('Have Permission');
+
+                return messaging.getToken()
+
+            })
+
+            .then(function (token) {
+
+                console.log(token);
+
+                $('.token_value').append(token);
+
+            })
+
+            .catch(function (err) {
+
+                console.log('Error Occured.');
+
+            })
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,236 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        "Tools.Hardcore"
+    </assembly>
+    <members>
+        <member name="M:Tools.DelegateCore.InvocationList``1(``0)">
+            <summary>Returns the invocation list of the delegate (type-safe).</summary>
+            <typeparam name="T">Type of delegate</typeparam>
+            <param name="delegate">A delegate to get invocation list of</param>
+            <returns>An array of delegates representing the invocation list of the current delegate.</returns>
+            <exception cref="T:System.ArgumentNullException">
+                <paramref name="delegate" /> is null</exception>
+            <seealso cref="M:System.Delegate.GetInvocationList" />
+        </member>
+        <member name="M:Tools.DelegateCore.RemoveAll``1(``0,``0)">
+            <summary>Removes all occurrences of the invocation list of a delegate from the invocation list of another delegate.</summary>
+            <typeparam name="T">Type of delegate</typeparam>
+            <param name="source">The delegate from which to remove the invocation list of <paramref name="value" />.</param>
+            <param name="value">The delegate that supplies the invocation list to remove from the invocation list of <paramref name="source" />.</param>
+            <returns>
+    A new delegate with an invocation list formed by taking the invocation list of <paramref name="source" /> and removing all occurrences of the invocation list of <paramref name="value" />,
+    if the invocation list of <paramref name="value" /> is found within the invocation list of <paramref name="source" />.
+    Returns <paramref name="source" /> if <paramref name="value" /> is null or if the invocation list of <paramref name="value" /> is not found within the invocation list of <paramref name="source" />.
+    Returns a null reference if the invocation list of <paramref name="value" /> is equal to the invocation list of <paramref name="source" />,
+    if <paramref name="source" /> contains only a series of invocation lists that are equal to the invocation list of <paramref name="value" />,
+    or if <paramref name="source" /> is a null reference.
+</returns>
+            <exception cref="T:System.MemberAccessException">The caller does not have access to the method represented by the delegate (for example, if the method is private).</exception>
+            <exception cref="T:System.ArgumentException">
+                <typeparamref name="T" /> is some kind of base class (such as <see cref="T:System.Delegate" /> or <see cref="T:System.MulticastDelegate" />) not actual delegate type and delegate type of <paramref name="source" /> and <paramref name="value" /> don't match.</exception>
+            <seealso cref="M:System.Delegate.RemoveAll(System.Delegate,System.Delegate)" />
+        </member>
+        <member name="M:Tools.DelegateCore.Remove``1(``0,``0)">
+            <summary>Removes the last occurrence of the invocation list of a delegate from the invocation list of another delegate.</summary>
+            <typeparam name="T">Type of delegate</typeparam>
+            <param name="source">The delegate from which to remove the invocation list of <paramref name="value" />.</param>
+            <param name="value">The delegate that supplies the invocation list to remove from the invocation list of <paramref name="source" />.</param>
+            <returns>
+    A new delegate with an invocation list formed by taking the invocation list of <paramref name="source" /> and removing the last occurrence of the invocation list of <paramref name="value" />,
+    if the invocation list of <paramref name="value" /> is found within the invocation list of <paramref name="source" />.
+    Returns <paramref name="source" /> if <paramref name="value" /> is null or if the invocation list of <paramref name="value" /> is not found within the invocation list of <paramref name="source" />.
+    Returns a null reference if the invocation list of <paramref name="source" /> is equal to the invocation list of <paramref name="value" /> or if <paramref name="source" /> is a null reference.
+</returns>
+            <exception cref="T:System.MemberAccessException">The caller does not have access to the method represented by the delegate (for example, if the method is private).</exception>
+            <exception cref="T:System.ArgumentException">
+                <typeparamref name="T" /> is some kind of base class (such as <see cref="T:System.Delegate" /> or <see cref="T:System.MulticastDelegate" />) not actual delegate type and delegate type of <paramref name="source" /> and <paramref name="value" /> don't match.</exception>
+            <seealso cref="M:System.Delegate.Remove(System.Delegate,System.Delegate)" />
+        </member>
+        <member name="M:Tools.DelegateCore.CombineWith``1(``0,``0[])">
+            <summary>Concatenates the invocation lists of a delegate and an array of delegates.</summary>
+            <typeparam name="T">Type of delegate</typeparam>
+            <param name="a">The delegate whose invocation list comes first.</param>
+            <param name="delegates">The array of delegates to combine.</param>
+            <returns>
+    A new delegate with an invocation list that concatenates the invocation lists of <paramref name="a" /> and the delegates in the <paramref name="delegates" /> array.
+    Returns <paramref name="a" /> if <paramref name="delegates" /> is null, contains zero elements, or every entry in <paramref name="a" /> is null.
+    Returns null if <paramref name="a" /> is null and <paramref name="delegates" />, empty or contains only null values.
+</returns>
+            <exception cref="T:System.ArgumentException">
+                <typeparamref name="T" /> is some kind of base class (such as <see cref="T:System.Delegate" /> or <see cref="T:System.MulticastDelegate" />) not actual delegate type and not all non-null items in the <paramref name="delegates" /> array and <paramref name="a" /> (if not null) are of same delegate type.</exception>
+            <seealso cref2="M:System.Delegate.Combine(System.Delegate[])" />
+        </member>
+        <member name="M:Tools.DelegateCore.CombineWith``1(``0,``0)">
+            <summary>Concatenates the invocation lists of two delegates in type-safe way.</summary>
+            <typeparam name="T">Type of delegate</typeparam>
+            <param name="a">The delegate whose invocation list comes first.</param>
+            <param name="b">The delegate whose invocation list comes last.</param>
+            <returns>
+    A new delegate with an invocation list that concatenates the invocation lists of <paramref name="a" /> and <paramref name="b" /> in that order.
+    Returns <paramref name="a" /> if <paramref name="b" /> is null, returns <paramref name="a" /> if <paramref name="b" /> is a null reference, and returns a null reference if both <paramref name="a" /> and <paramref name="b" /> are null references.
+</returns>
+            <exception cref="T:System.ArgumentException">
+                <typeparamref name="T" /> is some kind of base class (such as <see cref="T:System.Delegate" /> or <see cref="T:System.MulticastDelegate" />) not actual delegate type and both - <paramref name="a" /> and <paramref name="b" /> are non-null and they are not of same delegate type.</exception>
+            <seealso cref="M:System.Delegate.Combine(System.Delegate,System.Delegate)" />
+        </member>
+        <member name="M:Tools.DelegateCore.#ctor">
+            <summary>Private CTor - this is static class</summary>
+        </member>
+        <member name="T:Tools.DelegateCore">
+            <summary>Contains basic extension methods for working with delegates</summary>
+            <version version="1.5.3">This class is new in version 1.5.3</version>
+        </member>
+        <member name="M:Tools.EnumCore.GetFlags``1(``0)">
+            <summary>Gets individual flags (all bits that are set) from enumerated value</summary>
+            <typeparam name="T">Enumeration type to get flags from</typeparam>
+            <param name="value">Value to get flags from</param>
+            <returns>An array containing separate flags set in <paramref name="value" /></returns>
+            <exception cref="T:System.NotSupportedException">Underlying type of enumeration <typeparamref name="T" /> is not one of supported types (should not happen)</exception>
+            <version version="1.5.4">This function is new in version 1.5.4</version>
+        </member>
+        <member name="M:Tools.EnumCore.GetFlags(System.UInt64)">
+            <summary>Gets individual flags (all bits that are set) from <see cref="T:System.UInt64" /> value</summary>
+            <param name="value">Value to get flags from</param>
+            <returns>An array containing separate flags set in <paramref name="value" /></returns>
+            <version version="1.5.4">This function is new in version 1.5.4</version>
+            <version version="1.5.5">Fixed bug that highest flag from the type was ignored</version>
+        </member>
+        <member name="M:Tools.EnumCore.GetFlags(System.Int64)">
+            <summary>Gets individual flags (all bits that are set) from <see cref="T:System.Int64" /> value</summary>
+            <param name="value">Value to get flags from</param>
+            <returns>An array containing separate flags set in <paramref name="value" /></returns>
+            <version version="1.5.4">This function is new in version 1.5.4</version>
+        </member>
+        <member name="M:Tools.EnumCore.GetFlags(System.UInt32)">
+            <summary>Gets individual flags (all bits that are set) from <see cref="T:System.UInt32" /> value</summary>
+            <param name="value">Value to get flags from</param>
+            <returns>An array containing separate flags set in <paramref name="value" /></returns>
+            <version version="1.5.4">This function is new in version 1.5.4</version>
+            <version version="1.5.5">Fixed bug that highest flag from the type was ignored</version>
+        </member>
+        <member name="M:Tools.EnumCore.GetFlags(System.Int32)">
+            <summary>Gets individual flags (all bits that are set) from <see cref="T:System.Int32" /> value</summary>
+            <param name="value">Value to get flags from</param>
+            <returns>An array containing separate flags set in <paramref name="value" /></returns>
+            <version version="1.5.4">This function is new in version 1.5.4</version>
+        </member>
+        <member name="M:Tools.EnumCore.GetFlags(System.UInt16)">
+            <summary>Gets individual flags (all bits that are set) from <see cref="T:System.UInt16" /> value</summary>
+            <param name="value">Value to get flags from</param>
+            <returns>An array containing separate flags set in <paramref name="value" /></returns>
+            <version version="1.5.4">This function is new in version 1.5.4</version>
+            <version version="1.5.5">Fixed bug that highest flag from the type was ignored</version>
+        </member>
+        <member name="M:Tools.EnumCore.GetFlags(System.Int16)">
+            <summary>Gets individual flags (all bits that are set) from <see cref="T:System.Int16" /> value</summary>
+            <param name="value">Value to get flags from</param>
+            <returns>An array containing separate flags set in <paramref name="value" /></returns>
+            <version version="1.5.4">This function is new in version 1.5.4</version>
+        </member>
+        <member name="M:Tools.EnumCore.GetFlags(System.Byte)">
+            <summary>Gets individual flags (all bits that are set) from <see cref="T:System.Byte" /> value</summary>
+            <param name="value">Value to get flags from</param>
+            <returns>An array containing separate flags set in <paramref name="value" /></returns>
+            <version version="1.5.4">This function is new in version 1.5.4</version>
+            <version version="1.5.5">Fixed bug that highest flag from the type (128) was ignored</version>
+        </member>
+        <member name="M:Tools.EnumCore.GetFlags(System.SByte)">
+            <summary>Gets individual flags (all bits that are set) from <see cref="T:System.SByte" /> value</summary>
+            <param name="value">Value to get flags from</param>
+            <returns>An array containing separate flags set in <paramref name="value" /></returns>
+            <version version="1.5.4">This function is new in version 1.5.4</version>
+        </member>
+        <member name="M:Tools.EnumCore.GetConstant``1(``0)">
+            <summary>Gets <see cref="T:System.Reflection.FieldInfo" /> that represent given constant within an enum</summary>
+            <param name="value">Constant to be found</param>
+            <returns>
+                <see cref="T:System.Reflection.FieldInfo" /> of given <paramref name="value" /> if <paramref name="value" /> is member of <typeparamref name="T" />; null instead</returns>
+            <typeparam name="T">
+                <see cref="T:System.Enum" /> to found constant within</typeparam>
+        </member>
+        <member name="M:Tools.EnumCore.IsDefined``1(``0)">
+            <summary>Gets value indicating if given value is defined as member of an enumeration</summary>
+            <typeparam name="T">Type of the enumeration</typeparam>
+            <param name="value">Value to verify</param>
+            <returns>True if enumeration <typeparamref name="T" /> contains constant with value <paramref name="value" />; false otherwise.</returns>
+            <remarks>There is a companion method <see cref2="M:Tools.TypeTools.IsDefined(System.ENum)" /> in assembly Tools.</remarks>
+        </member>
+        <member name="M:Tools.EnumCore.TryParse``1(System.String,System.Boolean,``0@)">
+            <summary>Converts the string representation of the name or numeric value of one or more enumerated constants to an equivalent enumerated object. A parameter specifies whether the operation is case-sensitive. The return value indicates whether the conversion succeeded. (type-safe)</summary>
+            <typeparam name="T">The enumeration type to which to convert value.</typeparam>
+            <param nem="value">The string representation of the enumeration name or underlying value to convert.</param>
+            <param name="ignoreCase">true to ignore case; false to consider case.</param>
+            <param name="result">When this method returns, contains an object of type <typeparamref name="T" /> whose value is represented by value. This parameter is passed uninitialized.</param>
+            <returns>true if the value parameter was converted successfully; otherwise, false.</returns>
+        </member>
+        <member name="M:Tools.EnumCore.TryParse``1(System.String,``0@)">
+            <summary>Converts the string representation of the name or numeric value of one or more enumerated constants to an equivalent enumerated object. The return value indicates whether the conversion succeeded. (type-safe)</summary>
+            <typeparam name="T">The enumeration type to which to convert value.</typeparam>
+            <param nem="value">The string representation of the enumeration name or underlying value to convert.</param>
+            <param name="result">When this method returns, contains an object of type <typeparamref name="T" /> whose value is represented by value. This parameter is passed uninitialized.</param>
+            <returns>true if the value parameter was converted successfully; otherwise, false.</returns>
+        </member>
+        <member name="M:Tools.EnumCore.Parse``1(System.String,System.Boolean)">
+            <summary>Converts the string representation of the name or numeric value of one or more enumerated constants to an equivalent enumerated object. A parameter specifies whether the operation is case-sensitive. (type-safe)</summary>
+            <typeparam name="T">An enumeration type.</typeparam>
+            <param name="value"> A string containing the name or value to convert.</param>
+            <param name="ignoreCase">true to ignore case; false to regard case.</param>
+            <returns>An object of type enumType whose value is represented by value.</returns>
+            <exception cref="T:System.ArgumentException">
+                <paramref name="value" /> is either an empty string or only contains white space.-or- <paramref name="value" /> is a name, but not one of the named constants defined for the enumeration.</exception>
+            <exception cref="T:System.OverflowException">
+                <paramref name="value" /> is outside the range of the underlying type of <typeparamref name="T" />.</exception>
+        </member>
+        <member name="M:Tools.EnumCore.Parse``1(System.String)">
+            <summary>Converts the string representation of the name or numeric value of one or more enumerated constants to an equivalent enumerated object (type-safe).</summary>
+            <typeparam name="T">An enumeration type.</typeparam>
+            <param name="value"> A string containing the name or value to convert.</param>
+            <returns>An object of type enumType whose value is represented by value.</returns>
+            <exception cref="T:System.ArgumentException">
+                <paramref name="value" /> is either an empty string or only contains white space.-or- <paramref name="value" /> is a name, but not one of the named constants defined for the enumeration.</exception>
+            <exception cref="T:System.OverflowException">
+                <paramref name="value" /> is outside the range of the underlying type of <typeparamref name="T" />.</exception>
+        </member>
+        <member name="M:Tools.EnumCore.HasFlagSet``2(System.Collections.Generic.IDictionary`2{``0,``1},``1)">
+            <summary>Determines whether one or more bit fields are set in at least one of dictionary values.</summary>
+            <typeparam name="TKey">Type of dictionary keys</typeparam>
+            <typeparam name="TValue">Enumeration type - type of values in dictionary</typeparam>
+            <param name="dic">A dictionary to test values in</param>
+            <param name="flag">An enumeration value. - the flag(s) to test</param>
+            <returns>True if the bit field or bit fields that are set in <paramref name="flag" /> are also set in at least one value in <paramref name="dic" />; false otherwise or if <paramref name="dic" /> is null.</returns>
+            <exception cref="T:System.ArgumentException">
+                <typeparamref name="TValue" /> is <see cref="T:System.Enum" /> (not a derived type) and actual types of <paramref name="flag" /> and value in <paramref name="dic" /> differ.</exception>
+        </member>
+        <member name="M:Tools.EnumCore.GetValues``1">
+            <summary>Retrieves an array of the values of the constants in an enumeration.</summary>
+            <typeparam name="T">Type of enumeration to retrieve values of</typeparam>
+            <returns>An array that contains the values of the constants in <typeparamref name="T" />. The elements of the array are sorted by the binary values of the enumeration constants.</returns>
+        </member>
+        <member name="M:Tools.EnumCore.HasFlagSet``1(``0,``0[])">
+            <summary>Determines whether at least one of groups of one or more bit fields is set in an enum. (type-safe)</summary>
+            <typeparam name="T">Type of enumeration</typeparam>
+            <param name="value">An enumeration value to test flags on (this possibly is OR-ed value of multiple flags)</param>
+            <param name="flags">An enumeration values. - the flag(s) to test</param>
+            <returns>true if the bit field or bit fields that are set at least in one item of <paramref name="flags" /> are also set in <paramref name="value" />; otherwise, false. False if <paramref name="flags" /> is null.</returns>
+            <exception cref="T:System.ArgumentException">
+                <typeparamref name="T" /> is <see cref="T:System.Enum" /> (not a derived type) and actual types of <paramref name="value" /> and <paramref name="flag" /> differ.</exception>
+            <seelaso cref="M:System.Enum.HasFlag(System.Enum)" />
+        </member>
+        <member name="M:Tools.EnumCore.HasFlagSet``1(``0,``0)">
+            <summary>Determines whether one or more bit fields are set an enum. (type-safe)</summary>
+            <typeparam name="T">Type of enumeration</typeparam>
+            <param name="value">An enumeration value to test flags on (this possibly is OR-ed value of multiple flags)</param>
+            <param name="flag">An enumeration value. - the flag(s) to test</param>
+            <returns>true if the bit field or bit fields that are set in <paramref name="flag" /> are also set in <paramref name="value" />; otherwise, false.</returns>
+            <exception cref="T:System.ArgumentException">
+                <typeparamref name="T" /> is <see cref="T:System.Enum" /> (not a derived type) and actual types of <paramref name="value" /> and <paramref name="flag" /> differ.</exception>
+            <seelaso cref="M:System.Enum.HasFlag(System.Enum)" />
+        </member>
+        <member name="T:Tools.EnumCore">
+            <summary>Contains basic extension methods for working with enumerations</summary>
+            <version version="1.5.3">This class is new in version 1.5.3</version>
+            <version version="1.5.4">Added various overloaded <c>GetFlags</c> methods.</version>
+        </member>
+    </members>
+</doc>

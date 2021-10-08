@@ -1,0 +1,30 @@
+﻿@model  string
+@{
+    ViewBag.Title = "DisplayToken";
+
+}
+@*<a href="~/Views/Shared/_Layout.cshtml">~/Views/Shared/_Layout.cshtml</a>*@
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<div>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title" id="myModalLabel">token</h4>
+    </div>
+</div>
+
+
+
+<div id='myModal' class='modal'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'>
+                <label for="token"><b>token</b></label>
+                <input type="text" id="token" placeholder="Enter your token" name="token" required>
+            </div>
+        </div>
+    </div>
+
+</div>

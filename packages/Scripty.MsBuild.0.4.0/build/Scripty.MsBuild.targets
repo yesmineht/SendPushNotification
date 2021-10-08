@@ -1,0 +1,35 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <EvaluateScriptyFiles Condition=" '$(EvaluateScriptyFiles)' == '' ">true</EvaluateScriptyFiles>
+  </PropertyGroup>
+  
+  <Target Name="_ResolveScriptyFiles">
+    <ItemGroup>
+      <ScriptyFile Condition=" '@(ScriptyFile)' == '' and '%(Extension)' == '.csx' " Include="@(Content);@(None)" />
+      <ScriptyFile Condition=" '@(ScriptyFile)' == '' " Include="**\*.csx" />
+    </ItemGroup>
+  </Target>
+  
+  <UsingTask AssemblyFile="$(MSBuildThisFileDirectory)\..\tools\Scripty.MsBuild.dll" TaskName="ScriptyTask" />
+
+  <Target Name="EvaluateScriptyFiles" DependsOnTargets="_ResolveScriptyFiles" BeforeTargets="BeforeCompile">
+    <ScriptyTask ProjectFilePath="$(MSBuildProjectFullPath)" ScriptFiles="@(ScriptyFile)">
+      <Output TaskParameter="NoneFiles" ItemName="NoneFiles" />
+      <Output TaskParameter="CompileFiles" ItemName="CompileFiles" />
+      <Output TaskParameter="ContentFiles" ItemName="ContentFiles" />
+      <Output TaskParameter="EmbeddedResourceFiles" ItemName="EmbeddedResourceFiles" />
+    </ScriptyTask>
+    <ItemGroup>
+      <None Include="@(NoneFiles)" />
+    </ItemGroup>
+    <ItemGroup>
+      <Compile Include="@(CompileFiles)" />
+    </ItemGroup>
+    <ItemGroup>
+      <Content Include="@(ContentFiles)" />
+    </ItemGroup>
+    <ItemGroup>
+      <EmbeddedResource Include="@(EmbeddedResourceFiles)" />
+    </ItemGroup>
+  </Target>
+</Project>
